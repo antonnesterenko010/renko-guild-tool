@@ -1,0 +1,304 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <section class="profile-section">
+                <div class="section-title">Profile settings - {{ current_user.login }}</div>
+                <form action="" class="profile-form" data-user-id="{{ current_user.id }}">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="discord-nickname">Discord nickname:</label>
+                            <input type="text" name="discord_nickname" id="discord-nickname" value="{{ current_user.fields.discord_nickname }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="main-nickname">Main nickname:</label>
+                            <input type="text" name="main_nickname" id="main-nickname" value="{{ current_user.fields.main_nickname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="twink-nickname">Twink nickname:</label>
+                            <input type="text" name="twink_nickname" id="twink-nickname" value="{{ current_user.fields.twink_nickname }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="spec_main">Main class/spec:</label>
+                            <div class="form-select">
+                                <select name="spec_main" id="spec_main">
+                                    <option value="none" {{ current_user.fields.spec_main == 'none' ? 'selected' }}>none</option>
+                                    <option value="druid_balance" {{ current_user.fields.spec_main == 'druid_balance' ? 'selected' }}>Balance Druid</option>
+                                    <option value="druid_feral_tank" {{ current_user.fields.spec_main == 'druid_feral_tank' ? 'selected' }}>Feral Tank Druid</option>
+                                    <option value="druid_feral_dps" {{ current_user.fields.spec_main == 'druid_feral_dps' ? 'selected' }}>Feral DPS Druid</option>
+                                    <option value="druid_restoration" {{ current_user.fields.spec_main == 'druid_restoration' ? 'selected' }}>Restoration Druid</option>
+                                    <option value="hunter_beast_mastery" {{ current_user.fields.spec_main == 'hunter_beast_mastery' ? 'selected' }}>Beast Mastery Hunter</option>
+                                    <option value="hunter_survival" {{ current_user.fields.spec_main == 'hunter_survival' ? 'selected' }}>Survival Hunter</option>
+                                    <option value="mage_arcane" {{ current_user.fields.spec_main == 'mage_arcane' ? 'selected' }}>Arcane Mage</option>
+                                    <option value="paladin_holy" {{ current_user.fields.spec_main == 'paladin_holy' ? 'selected' }}>Holy Paladin</option>
+                                    <option value="paladin_protection" {{ current_user.fields.spec_main == 'paladin_protection' ? 'selected' }}>Protection Paladin</option>
+                                    <option value="paladin_retribution" {{ current_user.fields.spec_main == 'paladin_retribution' ? 'selected' }}>Retribution Paladin</option>
+                                    <option value="priest_discipline" {{ current_user.fields.spec_main == 'priest_discipline' ? 'selected' }}>Discipline Priest</option>
+                                    <option value="priest_holy" {{ current_user.fields.spec_main == 'priest_holy' ? 'selected' }}>Holy Priest</option>
+                                    <option value="priest_shadow" {{ current_user.fields.spec_main == 'priest_shadow' ? 'selected' }}>Shadow Priest</option>
+                                    <option value="rogue_combat" {{ current_user.fields.spec_main == 'rogue_combat' ? 'selected' }}>Combat Rogue</option>
+                                    <option value="shaman_elemental" {{ current_user.fields.spec_main == 'shaman_elemental' ? 'selected' }}>Elemental Shaman</option>
+                                    <option value="shaman_enhancement" {{ current_user.fields.spec_main == 'shaman_enhancement' ? 'selected' }}>Enhancement Shaman</option>
+                                    <option value="shaman_restoration" {{ current_user.fields.spec_main == 'shaman_restoration' ? 'selected' }}>Restoration Shaman</option>
+                                    <option value="warlock_affliction" {{ current_user.fields.spec_main == 'warlock_affliction' ? 'selected' }}>Affliction Warlock</option>
+                                    <option value="warlock_demonology" {{ current_user.fields.spec_main == 'warlock_demonology' ? 'selected' }}>Demonology Warlock</option>
+                                    <option value="warlock_destruction" {{ current_user.fields.spec_main == 'warlock_destruction' ? 'selected' }}>Destruction Warlock</option>
+                                    <option value="warrior_arms" {{ current_user.fields.spec_main == 'warrior_arms' ? 'selected' }}>Arms Warrior</option>
+                                    <option value="warrior_fury" {{ current_user.fields.spec_main == 'warrior_fury' ? 'selected' }}>Fury Warrior</option>
+                                    <option value="warrior_protection" {{ current_user.fields.spec_main == 'warrior_protection' ? 'selected' }}>Protection Warrior</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="spec_twink">Twink class/spec:</label>
+                            <div class="form-select">
+                                <select name="spec_twink" id="spec_twink">
+                                    <option value="none" {{ current_user.fields.spec_twink == 'none' ? 'selected' }}>none</option>
+                                    <option value="druid_balance" {{ current_user.fields.spec_twink == 'druid_balance' ? 'selected' }}>Balance Druid</option>
+                                    <option value="druid_feral_tank" {{ current_user.fields.spec_twink == 'druid_feral_tank' ? 'selected' }}>Feral Tank Druid</option>
+                                    <option value="druid_feral_dps" {{ current_user.fields.spec_twink == 'druid_feral_dps' ? 'selected' }}>Feral DPS Druid</option>
+                                    <option value="druid_restoration" {{ current_user.fields.spec_twink == 'druid_restoration' ? 'selected' }}>Restoration Druid</option>
+                                    <option value="hunter_beast_mastery" {{ current_user.fields.spec_twink == 'hunter_beast_mastery' ? 'selected' }}>Beast Mastery Hunter</option>
+                                    <option value="hunter_survival" {{ current_user.fields.spec_twink == 'hunter_survival' ? 'selected' }}>Survival Hunter</option>
+                                    <option value="mage_arcane" {{ current_user.fields.spec_twink == 'mage_arcane' ? 'selected' }}>Arcane Mage</option>
+                                    <option value="paladin_holy" {{ current_user.fields.spec_twink == 'paladin_holy' ? 'selected' }}>Holy Paladin</option>
+                                    <option value="paladin_protection" {{ current_user.fields.spec_twink == 'paladin_protection' ? 'selected' }}>Protection Paladin</option>
+                                    <option value="paladin_retribution" {{ current_user.fields.spec_twink == 'paladin_retribution' ? 'selected' }}>Retribution Paladin</option>
+                                    <option value="priest_discipline" {{ current_user.fields.spec_twink == 'priest_discipline' ? 'selected' }}>Discipline Priest</option>
+                                    <option value="priest_holy" {{ current_user.fields.spec_twink == 'priest_holy' ? 'selected' }}>Holy Priest</option>
+                                    <option value="priest_shadow" {{ current_user.fields.spec_twink == 'priest_shadow' ? 'selected' }}>Shadow Priest</option>
+                                    <option value="rogue_combat" {{ current_user.fields.spec_twink == 'rogue_combat' ? 'selected' }}>Combat Rogue</option>
+                                    <option value="shaman_elemental" {{ current_user.fields.spec_twink == 'shaman_elemental' ? 'selected' }}>Elemental Shaman</option>
+                                    <option value="shaman_enhancement" {{ current_user.fields.spec_twink == 'shaman_enhancement' ? 'selected' }}>Enhancement Shaman</option>
+                                    <option value="shaman_restoration" {{ current_user.fields.spec_twink == 'shaman_restoration' ? 'selected' }}>Restoration Shaman</option>
+                                    <option value="warlock_affliction" {{ current_user.fields.spec_twink == 'warlock_affliction' ? 'selected' }}>Affliction Warlock</option>
+                                    <option value="warlock_demonology" {{ current_user.fields.spec_twink == 'warlock_demonology' ? 'selected' }}>Demonology Warlock</option>
+                                    <option value="warlock_destruction" {{ current_user.fields.spec_twink == 'warlock_destruction' ? 'selected' }}>Destruction Warlock</option>
+                                    <option value="warrior_arms" {{ current_user.fields.spec_twink == 'warrior_arms' ? 'selected' }}>Arms Warrior</option>
+                                    <option value="warrior_fury" {{ current_user.fields.spec_twink == 'warrior_fury' ? 'selected' }}>Fury Warrior</option>
+                                    <option value="warrior_protection" {{ current_user.fields.spec_twink == 'warrior_protection' ? 'selected' }}>Protection Warrior</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    {# <div class="form-row">
+                        <div class="form-group">
+                            <label for="profession-primary">Profession #1</label>
+                            <div class="form-select">
+                                <select name="profession_primary" id="profession-primary">
+                                    <option value="none" {{ current_user.fields.profession_primary == 'none' ? 'selected' }}>none</option>
+                                    <option value="enchanting" {{ current_user.fields.profession_primary == 'enchanting' ? 'selected' }}>enchanting</option>
+                                    <option value="tailoring" {{ current_user.fields.profession_primary == 'tailoring' ? 'selected' }}>tailoring</option>
+                                    <option value="leatherworking" {{ current_user.fields.profession_primary == 'leatherworking' ? 'selected' }}>leatherworking</option>
+                                    <option value="blacksmithing" {{ current_user.fields.profession_primary == 'blacksmithing' ? 'selected' }}>blacksmithing</option>
+                                    <option value="engineering" {{ current_user.fields.profession_primary == 'engineering' ? 'selected' }}>engineering</option>
+                                    <option value="jewelcrafting" {{ current_user.fields.profession_primary == 'jewelcrafting' ? 'selected' }}>jewelcrafting</option>
+                                    <option value="alchemy" {{ current_user.fields.profession_primary == 'alchemy' ? 'selected' }}>alchemy</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="profession-secondary">Profession #2</label>
+                            <div class="form-select">
+                                <select name="profession_secondary" id="profession-secondary">
+                                <option value="none" {{ current_user.fields.profession_secondary == 'none' ? 'selected' }}>none</option>
+                                <option value="enchanting" {{ current_user.fields.profession_secondary == 'enchanting' ? 'selected' }}>enchanting</option>
+                                <option value="tailoring" {{ current_user.fields.profession_secondary == 'tailoring' ? 'selected' }}>tailoring</option>
+                                <option value="leatherworking" {{ current_user.fields.profession_secondary == 'leatherworking' ? 'selected' }}>leatherworking</option>
+                                <option value="blacksmithing" {{ current_user.fields.profession_secondary == 'blacksmithing' ? 'selected' }}>blacksmithing</option>
+                                <option value="engineering" {{ current_user.fields.profession_secondary == 'engineering' ? 'selected' }}>engineering</option>
+                                <option value="jewelcrafting" {{ current_user.fields.profession_secondary == 'jewelcrafting' ? 'selected' }}>jewelcrafting</option>
+                                <option value="alchemy" {{ current_user.fields.profession_secondary == 'alchemy' ? 'selected' }}>alchemy</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> #}
+                    <div class="form-group">
+                        <button class="button success profile-form__submit">Save</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="signup-section">
+                <div class="section-title">LFG</div>
+                <div class="form-block">
+                    <div class="tab-list mode">
+                        <div class="tab" data-mode-id="1">Heroic</div>
+                        <div class="tab" data-mode-id="2">Normal</div>
+                        {# <div class="tab" data-mode-id="3">Other</div> #}
+                    </div>
+                    <div class="tab-list character">
+                        <div class="tab" data-character-id="1">Main</div>
+                        <div class="tab" data-character-id="2">Twink</div>
+                    </div>
+                    {% set modes = {
+                        1: 'heroic',
+                        2: 'normal'
+                    } %}
+                    {% set characters = {
+                        1: 'main',
+                        2: 'twink'
+                    }%}
+                    <div class="form-list">
+                    {% for mode_id, mode in modes %}
+                        {% for character_id, character in characters %}
+                            <form class="signup-form {{ mode }} {{ character }}" data-mode-id="{{ mode_id }}" data-character-id="{{ character_id }}">
+                                {% for location, location_dungeons in dungeons %}
+                                    <div class="form-row">
+                                        <div class="location-title">{{ location|replace({'_':' '})|title }}</div>
+                                        <div class="form-group">
+                                            {% for dungeon in location_dungeons %}
+                                                <div class="form-checkbox">
+                                                    <label for="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}">{{ dungeon.dungeon_name }}</label>
+                                                    <input type="checkbox" name="dungeons[]" value="{{ dungeon.id }}" id="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}" {{ current_user_signups[mode][character][dungeon.id] is defined ? 'checked' }}>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <button class="signup-form__submit button success">Save {{ mode }} {{ character }}</button>
+                            </form>
+                        {% endfor %}
+                    {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <div class="message"></div>
+        </div>
+    </main>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript">
+        $(function () {
+            const messageText = $('.message');
+            const profileForm = $('.profile-form');
+
+            profileForm.on('click', '.profile-form__submit', function (e) {
+                e.preventDefault();
+                const userId = profileForm.data("user-id");
+                const formData = profileForm.serialize();
+
+                const discordNickname = $.trim($('#discord-nickname').val());
+                const mainNickname = $.trim($('#main-nickname').val());
+                if (!discordNickname || !mainNickname) {
+                    messageText
+                        .text('Fill Discord nickname and Main nickname first')
+                        .addClass('warning')
+                        .fadeIn();
+
+                    setTimeout(function() {
+                        messageText.fadeOut();
+                    }, 3000);
+
+                    return;
+                }
+                $.ajax({
+                    url: "/ajax/user-field-add",
+                    type: "POST",
+                    dataType: "json",
+                    data: formData + "&user_id=" + userId,
+                    success: function (response) {
+                        console.log("OK:", response);
+                        messageText.text('Saved');
+                        messageText.removeClass('warning').addClass('success').fadeIn();
+                        setTimeout(function() {
+                            messageText.fadeOut();
+                        }, 3000)
+                    },
+                    error: function (xhr) {
+                        console.log("FAILED", {
+                        status: xhr.status,
+                        statusText: xhr.statusText,
+                        responseText: xhr.responseText
+                        });
+                        alert("Request failed: " + xhr.status);
+                    }
+                });
+            });
+            
+            const signUpSection = $('.signup-section');
+            const modeTabs = signUpSection.find('.tab-list.mode .tab');
+            const characterTabs = signUpSection.find('.tab-list.character .tab');
+            const signUpForms = signUpSection.find('.signup-form');
+
+            let activeModeId = signUpSection.find('.tab-list.mode .tab.active').data('mode-id') || 1;
+            let activeCharacterId = signUpSection.find('.tab-list.character .tab.active').data('character-id') || 1;
+            function renderActiveForm() {
+                modeTabs.removeClass('active');
+                characterTabs.removeClass('active');
+                signUpForms.removeClass('active visible');
+
+                modeTabs.filter('[data-mode-id="' + activeModeId + '"]').addClass('active');
+                characterTabs.filter('[data-character-id="' + activeCharacterId + '"]').addClass('active');
+
+                const activeForm = signUpForms.filter('[data-mode-id="' + activeModeId + '"][data-character-id="' + activeCharacterId + '"]');
+                activeForm.addClass('active');
+
+                setTimeout(function () {
+                    activeForm.addClass('visible');
+                }, 10);
+            }
+            modeTabs.on('click', function () {
+                activeModeId = $(this).data('mode-id');
+                renderActiveForm();
+            });
+
+            characterTabs.on('click', function () {
+                activeCharacterId = $(this).data('character-id');
+                renderActiveForm();
+            });
+
+            renderActiveForm();
+            
+            signUpForms.on('click', '.signup-form__submit', function(e) {
+                e.preventDefault();
+                const form = $(this).closest('.signup-form');
+                const modeId = form.data('mode-id');
+                const characterId = form.data('character-id');
+                const formData = form.serialize();
+
+                const discordNickname = $.trim($('#discord-nickname').val());
+                const mainNickname = $.trim($('#main-nickname').val());
+                if (!discordNickname || !mainNickname) {
+                    messageText
+                        .text('Fill Discord nickname and Main nickname first')
+                        .addClass('warning')
+                        .fadeIn();
+
+                    setTimeout(function() {
+                        messageText.fadeOut();
+                    }, 3000);
+
+                    return;
+                }
+                $.ajax({
+                    url: "/ajax/user-dungeon-signup",
+                    type: "POST",
+                    dataType: "json",
+                    data: formData + "&mode_id=" + modeId + "&character_id=" + characterId,
+                    success: function (response) {
+                        console.log("OK:", response);
+                        messageText.text('Saved');
+                        messageText.addClass('success').fadeIn();
+                        setTimeout(function() {
+                            messageText.fadeOut();
+                        }, 3000)
+                    },
+                    error: function (xhr) {
+                        console.log("FAILED", {
+                            status: xhr.status,
+                            statusText: xhr.statusText,
+                            responseText: xhr.responseText
+                        });
+                        alert("Request failed: " + xhr.status);
+                    }
+                });
+            })
+        });
+    </script>
+{% endblock %}

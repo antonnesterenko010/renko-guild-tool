@@ -1,0 +1,69 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main>
+        <div class="container">
+            <section class="lfg-section">
+                <div class="mode-list">
+                    <div class="mode" data-mode-id="heroic">Heroic</div>
+                    <div class="mode" data-mode-id="normal">Normal</div>
+                    <div class="mode" data-mode-id="other">Other</div>
+                </div>
+                {% set modes = ['heroic','normal'] %}
+                {% for mode in modes %}
+                    <div class="mode-block {{ mode }}">
+                        <div class="location-list">
+                            {% for location, location_dungeons in dungeons %}
+                                <div class="location">
+                                    <div class="location-title">{{ location|replace({'_':' '})|title }}</div>
+                                    <div class="dungeon-list">
+                                        {% for dungeon in location_dungeons %}
+                                            <div class="dungeon">
+                                                <div class="dungeon-title">{{ dungeon.dungeon_name }}</div>
+                                                <div class="user-list">
+                                                    {% if signups[mode][dungeon.id] is defined %}
+                                                        {% for user in signups[mode][dungeon.id] %}
+                                                            <div class="user {{ user.spec }}">
+                                                                <div class="nickname">{{ user.name }}</div>
+                                                                <div class="discord">[@{{ user.discord_nickname }}]</div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        const lfgSection = $('.lfg-section');
+        const modeTabs = lfgSection.find('.mode-list .mode');
+        const modeBlocks = lfgSection.find('.mode-block');
+
+        let activeMode = 'heroic';
+
+        function renderMode() {
+            modeTabs.removeClass('active');
+            modeBlocks.removeClass('active');
+
+            modeTabs.filter('[data-mode-id="' + activeMode + '"]').addClass('active');
+            modeBlocks.filter('.' + activeMode).addClass('active');
+        }
+
+        modeTabs.on('click', function () {
+            activeMode = $(this).data('mode-id');
+            renderMode();
+        });
+
+        renderMode();
+    </script>
+{% endblock %}
