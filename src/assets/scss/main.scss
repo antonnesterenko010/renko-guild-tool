@@ -259,6 +259,13 @@ section {
 .page-home {
     background-color: #faf0e6;
     background-image: linear-gradient(315deg, #faf0e6 0%, #f5f5f5 74%);
+    .container {
+        width: 100%;
+        padding: 0 40px;
+        @media (max-width: 991px) {
+            padding: 0;
+        }
+    }
 }
 .page-404 {
     background-color: #b7410e;
@@ -322,10 +329,8 @@ section {
             display: flex;
             align-items: center;
             gap: 10px;
+            position: relative;
             width: 50%;
-            label {
-                min-width: 150px;
-            }
         }
         .form-button {
             cursor: pointer;
@@ -334,6 +339,8 @@ section {
             &:hover {
                 transform: translateY(-2px);
             }
+            position: absolute;
+            right: 0;
         }
     }
     .profile-form {
@@ -451,6 +458,9 @@ section {
     .mode-list {
         display: flex;
         gap: 20px;
+        @media (max-width: 991px) {
+            padding: 0 20px;
+        }
         .mode {
             border: 1px solid #000;
             border-radius: 4px;
@@ -477,35 +487,103 @@ section {
     .location-list {
         .location {
             margin: 20px 0;
+            padding: 20px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            &:hover{
+                &::before {
+                    background: rgba(0,0,0,0.1);
+                }
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                transition: all .2s ease;
+                height: 100%;
+                background: rgba(0,0,0,0.3);
+                pointer-events: none;
+            }
+            &.hellfire_peninsula {
+                background-image: url('/img/hellfire_peninsula.jpg');
+            }
+            &.auchindoun {
+                background-image: url('/img/auchindoun.jpg');
+                background-position: center;
+            }
+            &.caverns_of_time {
+                background-image: url('/img/caverns_of_time.webp');
+            }
+            &.zangarmarsh {
+                background-image: url('/img/zangarmarsh.jpg');
+            }
+            &.netherstorm {
+                background-image: url('/img/netherstorm.jpg');
+                background-position: bottom;
+            }
+            &.pvp {
+                background-image: url('/img/arena.jpg');
+                background-position: center;
+            }
+            &.raid {
+                background-image: url('/img/karazhan.jpg');
+                background-position: center;
+            }
         }
         .location-title {
             font-family: 'Oswald', sans-serif;
             font-size: 24px;
             margin: 0 0 15px;
+            color: #fff;
+            position: relative;
+            z-index: 1;
         }
     }
     .dungeon-list {
         display: flex;
         gap: 20px;
+        position: relative;
+        z-index: 1;
         @media (max-width: 991px) {
             flex-direction: column;
         }
         .dungeon {
-            flex-basis: 25%;
-            height: 200px;
+            flex-basis: 50%;
+            // height: 200px;
             border: 1px solid #000;
             padding: 10px;
             background: #fff;
+            height: fit-content;
             .dungeon-title {
                 font-family: 'Oswald', sans-serif;
                 font-size: 20px;
                 border-bottom: 1px solid #000;
+                position: relative;
+            }
+            .counter {
+                position: absolute;
+                right: 0;
+                top: 10px;
+                font-size: 12px;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: -10px;
+                    top: 5px;
+                    width: 5px;
+                    border-radius: 50%;
+                    height: 5px;
+                    background: rgba(80,200,120,1);
+                }
             }
         }
         .user-list {
             padding: 10px 0 0 0px;
-            max-height: 155px;
-            overflow-y: auto;
+            // max-height: 155px;
+            // overflow-y: auto;
             .user {
                 position: relative;
                 margin: 5px 0;
@@ -528,6 +606,10 @@ section {
                 .nickname {
                     font-family: 'Oswald', sans-serif;
                     font-size: 18px;
+                    position: relative;
+                    display: inline-block;
+                    z-index: 1;
+                    background: #fff;
                 }
                 .discord {
                     position: absolute;
@@ -618,17 +700,17 @@ section {
 }
 
 .priest_shadow {
-    .nickname { color:#FFFFFF; }
+    .nickname { color:#000; }
     &::after { background-image:url('/img/priest_shadow.png'); }
 }
 
 .priest_holy {
-    .nickname { color:#FFFFFF; }
+    .nickname { color:#000; }
     &::after { background-image:url('/img/priest_holy.png'); }
 }
 
 .priest_discipline {
-    .nickname { color:#FFFFFF; }
+    .nickname { color:#000; }
     &::after { background-image:url('/img/priest_discipline.png'); }
 }
 

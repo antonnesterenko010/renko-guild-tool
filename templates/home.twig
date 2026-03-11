@@ -9,31 +9,39 @@
                     <div class="mode" data-mode-id="normal">Normal</div>
                     <div class="mode" data-mode-id="other">Other</div>
                 </div>
-                {% set modes = ['heroic','normal'] %}
+                {% set modes = ['heroic','normal', 'other'] %}
                 {% for mode in modes %}
                     <div class="mode-block {{ mode }}">
                         <div class="location-list">
                             {% for location, location_dungeons in dungeons %}
-                                <div class="location">
-                                    <div class="location-title">{{ location|replace({'_':' '})|title }}</div>
-                                    <div class="dungeon-list">
-                                        {% for dungeon in location_dungeons %}
-                                            <div class="dungeon">
-                                                <div class="dungeon-title">{{ dungeon.dungeon_name }}</div>
-                                                <div class="user-list">
-                                                    {% if signups[mode][dungeon.id] is defined %}
-                                                        {% for user in signups[mode][dungeon.id] %}
-                                                            <div class="user {{ user.spec }}">
-                                                                <div class="nickname">{{ user.name }}</div>
-                                                                <div class="discord">[@{{ user.discord_nickname }}]</div>
+                                {% if (mode == 'other' and (location == 'raid' or location == 'pvp')) or (mode != 'other' and location != 'raid' and location != 'pvp') %}
+                                    <div class="location {{ location }}">
+                                        <div class="location-title">{{ location == 'pvp' ? 'PvP' : location|replace({'_':' '})|title }}</div>
+                                        <div class="dungeon-list">
+                                            {% for dungeon in location_dungeons %}
+                                                <div class="dungeon">
+                                                    <div class="dungeon-title">{{ dungeon.dungeon_name }} 
+                                                        {% if signups[mode][dungeon.id] is defined %}
+                                                            <div class="counter">
+                                                                {{ signups[mode][dungeon.id]|length }}
                                                             </div>
-                                                        {% endfor %}
-                                                    {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="user-list">
+                                                        {% if signups[mode][dungeon.id] is defined %}
+                                                            {% for user in signups[mode][dungeon.id] %}
+                                                                <div class="user {{ user.spec }}">
+                                                                    <div class="nickname">{{ user.name }}</div>
+                                                                    <div class="discord">[@{{ user.discord_nickname }}]</div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        {% endfor %}
+                                            {% endfor %}
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </div>

@@ -130,7 +130,7 @@
                     <div class="tab-list mode">
                         <div class="tab" data-mode-id="1">Heroic</div>
                         <div class="tab" data-mode-id="2">Normal</div>
-                        {# <div class="tab" data-mode-id="3">Other</div> #}
+                        <div class="tab" data-mode-id="3">Other</div>
                     </div>
                     <div class="tab-list character">
                         <div class="tab" data-character-id="1">Main</div>
@@ -138,7 +138,8 @@
                     </div>
                     {% set modes = {
                         1: 'heroic',
-                        2: 'normal'
+                        2: 'normal',
+                        3: 'other'
                     } %}
                     {% set characters = {
                         1: 'main',
@@ -149,17 +150,18 @@
                         {% for character_id, character in characters %}
                             <form class="signup-form {{ mode }} {{ character }}" data-mode-id="{{ mode_id }}" data-character-id="{{ character_id }}">
                                 {% for location, location_dungeons in dungeons %}
-                                    <div class="form-row">
-                                        <div class="location-title">{{ location|replace({'_':' '})|title }}</div>
-                                        <div class="form-group">
-                                            {% for dungeon in location_dungeons %}
-                                                <div class="form-checkbox">
-                                                    <label for="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}">{{ dungeon.dungeon_name }}</label>
-                                                    <input type="checkbox" name="dungeons[]" value="{{ dungeon.id }}" id="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}" {{ current_user_signups[mode][character][dungeon.id] is defined ? 'checked' }}>
-                                                </div>
-                                            {% endfor %}
+                                    {% if (mode == 'other' and (location == 'raid' or location == 'pvp')) or (mode != 'other' and location != 'raid' and location != 'pvp') %}
+                                        <div class="form-row">
+                                            <div class="location-title">{{ location == 'pvp' ? 'PvP' : location|replace({'_':' '})|title }}</div>                                            <div class="form-group">
+                                                {% for dungeon in location_dungeons %}
+                                                    <div class="form-checkbox">
+                                                        <label for="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}">{{ dungeon.dungeon_name }}</label>
+                                                        <input type="checkbox" name="dungeons[]" value="{{ dungeon.id }}" id="{{ character }}-{{ mode }}-dungeon-{{ dungeon.id }}" {{ current_user_signups[mode][character][dungeon.id] is defined ? 'checked' }}>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 {% endfor %}
                                 <button class="signup-form__submit button success">Save {{ mode }} {{ character }}</button>
                             </form>
